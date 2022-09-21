@@ -15,20 +15,6 @@ RUN apt-get update \
     unzip \
     libwebp-dev \
     libpng-dev libxpm-dev
-#
-#RUN pecl channel-update pecl.php.net \
-##    && pecl install memcached \
-##    && pecl install imagick-beta \
-##    && pecl install mcrypt-1.0.2 \
-##    && docker-php-ext-enable memcached \
-##    && docker-php-ext-enable imagick \
-##    && docker-php-ext-enable mcrypt \
-#    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
-#       docker-php-ext-install \
-#         gd \
-#         pdo \
-#         pdo_mysql
-
 
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql

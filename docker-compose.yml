@@ -5,27 +5,13 @@ networks:
 
 services:
 
-  fpm:
-    container_name: ${PREFIX}_fpm
-    image: ${PREFIX}_fpm
+  app:
+    container_name: ${PREFIX}_app
+    image: ${PREFIX}_app
     build: ./fpm
     restart: always
-#    expose:
-#      - 9000
     volumes:
       - ${SOURCE_DIR}:${TARGET_DIR}
-
-  composer:
-    container_name: ${PREFIX}_composer
-    image: ${PREFIX}_composer
-    build: ./composer
-    depends_on:
-      - fpm
-    restart: always
-    volumes:
-      - ${SOURCE_DIR}:${TARGET_DIR}
-    stdin_open: true
-    tty: true
 
   nginx:
     container_name: ${PREFIX}_nginx
@@ -38,7 +24,7 @@ services:
       - ${SOURCE_DIR}:${TARGET_DIR}
       - ./nginx/sites:/etc/nginx/conf.d
     links:
-      - fpm
+      - app
     stdin_open: true
     tty: true
 
