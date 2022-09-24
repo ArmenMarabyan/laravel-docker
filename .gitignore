@@ -1,1 +1,6 @@
 databases/
+elk/elasticsearch/_state
+elk/elasticsearch/indices
+elk/elasticsearch/snapshot_cache
+elk/elasticsearch/node.lock
+elk/elasticsearch/nodes
