@@ -76,7 +76,7 @@ services:
       - ${REDIS_PATH_CONF}:/redis.conf
     command: [ "redis-server", "/redis.conf" ]
 
-    # The 'setup' service runs a one-off script which initializes the
+    # The 'setup_elk' service runs a one-off script which initializes the
     # 'logstash_internal' and 'kibana_system' users inside Elasticsearch with the
     # values of the passwords defined in the '.env' file.
     #
@@ -90,7 +90,7 @@ services:
               ELASTIC_VERSION: ${ELASTIC_VERSION}
       init: true
       volumes:
-          - ./elk/setup:/state:Z
+          - ./elk/setup_elk:/state:Z
       environment:
           ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
           LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
