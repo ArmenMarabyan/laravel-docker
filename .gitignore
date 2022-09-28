@@ -4,3 +4,4 @@ elk/elasticsearch/indices
 elk/elasticsearch/snapshot_cache
 elk/elasticsearch/node.lock
 elk/elasticsearch/nodes
+logs/nginx/

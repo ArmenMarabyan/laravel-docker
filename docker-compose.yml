@@ -32,6 +32,7 @@ services:
       - "8080:80"
     volumes:
       - ${SOURCE_DIR}:${TARGET_DIR}
+      - ./logs/nginx:/var/log/nginx
       - ./nginx/sites:/etc/nginx/conf.d
 #    links:
 #      - app
@@ -88,6 +89,7 @@ services:
           context: ./elk/setup_elk/
           args:
               ELASTIC_VERSION: ${ELASTIC_VERSION}
+      container_name: ${PREFIX}_setup_elk
       init: true
       volumes:
           - ./elk/setup_elk:/state:Z
@@ -105,6 +107,7 @@ services:
           context: ./elk/elasticsearch/
           args:
               ELASTIC_VERSION: ${ELASTIC_VERSION}
+      container_name: ${PREFIX}_elasticsearch
       volumes:
           - ./elk/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
           - ./elk/elasticsearch:/usr/share/elasticsearch/data:z
@@ -128,6 +131,7 @@ services:
           context: ./elk/logstash/
           args:
               ELASTIC_VERSION: ${ELASTIC_VERSION}
+      container_name: ${PREFIX}_logstash
       volumes:
           - ./elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
           - ./elk/logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
@@ -149,6 +153,7 @@ services:
           context: ./elk/kibana/
           args:
               ELASTIC_VERSION: ${ELASTIC_VERSION}
+      container_name: ${PREFIX}_kibana
       volumes:
           - ./elk/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
       ports:
